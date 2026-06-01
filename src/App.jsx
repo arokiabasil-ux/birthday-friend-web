@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRef } from "react";
+import "./App.css";
 function App() {
 const [page, setPage] = useState("password");
 const [password, setPassword] = useState("");
@@ -8,6 +9,10 @@ const [currentPhoto, setCurrentPhoto] = useState(0);
 const [opened, setOpened] = useState(false);
 const galleryAudioRef = useRef(new Audio("/music/memories.mp3"));
 const audioRef = useRef(new Audio("/music/birthday.mp3"));
+const heartAnimation = {
+  animation: "float 6s infinite ease-in-out",
+  
+};
 const photos = [
 "/images/photo1.jpeg",
 "/images/photo2.jpeg",
@@ -63,7 +68,7 @@ if (page === "final") {
       }}
     >
       <h1>🎂 HAPPY BIRTHDAY VADAKI 🎂</h1>
-      <h2>✨ Have an Amazing Year Ahead ✨</h2>
+      <h3>✨ Have an Amazing Year Ahead ✨</h3>
       <h3>Best Wishes From Your Friend ❤️</h3>
     </div>
   );
@@ -394,14 +399,106 @@ alignItems: "center",
 return (
 <div
 style={{
-height: "100vh",
-display: "flex",
-flexDirection: "column",
-justifyContent: "center",
-alignItems: "center",
+  height: "100vh",
+  background: "linear-gradient(135deg, #8B0000, #C0392B, #E74C3C)",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  position: "relative",
+  overflow: "hidden",
 }}
-> <h1>🎁 A Special Surprise Awaits You</h1>
+> 
+{[...Array(15)].map((_, i) => (
+  <div
+  key={i}
+  className="heart"
+  style={{
+      position: "absolute",
+      color: "rgba(255,255,255,0.4)",
+      fontSize: `${20 + Math.random() * 20}px`,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 2}s`,
+      pointerEvents: "none",
+      zIndex: 999,
+      animation: "float 4s infinite ease-in-out",
+      transform: "translateY(0px)",
+    }}
+  >
+    ❤️
+  </div>
+))}
+<div
+  style={{
+    width: "420px",
+    background: "white",
+    padding: "15px",
+    borderRadius: "10px",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
+    transform: "rotate(-3deg)",
+    marginRight: "80px",
+    marginLeft: "30px",
+  }}
+>
+  <img
+    src="/images/photo1.jpeg"
+    alt="Birthday"
+    style={{
+      width: "100%",
+      height: "350px",
+      objectFit: "cover",
+    }}
+  />
 
+  <h3
+    style={{
+      color: "#8B0000",
+      textAlign: "center",
+      marginTop: "10px",
+    }}
+  >
+    Happy Birthday Vadaki 🎂
+  </h3>
+</div>
+<div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    background: "rgba(255,255,255,0.22)",
+    padding: "40px",
+    width: "550px",
+    borderRadius: "20px",
+    backdropFilter: "blur(10px)",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+  }}
+
+><h1
+  style={{
+    color: "white",
+    fontSize: "48px",
+    textAlign: "center",
+    lineHeight: "1.2",
+    maxWidth: "450px",
+    marginBottom: "25px",
+    border: "none",
+    borderRadius: "10px",
+    width: "320px",
+    
+  }}
+>
+  🎁 A Special Surprise Awaits You
+</h1>
+<p
+  style={{
+    color: "white",
+    fontSize: "18px",
+    marginBottom: "25px",
+  }}
+>
+  A beautiful surprise is waiting just for you ❤️
+</p>
 
   <input
     type="text"
@@ -427,7 +524,7 @@ alignItems: "center",
     Unlock Surprise
   </button>
 </div>
-
+</div>
 
 );
 }
